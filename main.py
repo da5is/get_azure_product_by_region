@@ -2,7 +2,6 @@ from selenium import webdriver # pip install selenium
 from pprint import pprint
 from selenium.webdriver.common.by import By
 
-
 def get_status_from_row(row):
     product = row.get_attribute("data-product-slug")
     status_cell = row.find_element(by=By.TAG_NAME, value='td')
@@ -24,6 +23,7 @@ def get_products_by_region(region:str)->dict:
     options.add_argument('--disable-gpu')
     options.add_argument("--headless=new")  
     driver = webdriver.Chrome(options=options)
+
     driver.get(f"https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/?regions={region}&rar=true&products=all&cdn=disable")
     table = driver.find_element(by=By.ID, value='primary-table') # gets the JS rendered table
     status_rows = table.find_elements(by=By.TAG_NAME, value='tr')
