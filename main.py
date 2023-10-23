@@ -17,7 +17,7 @@ def get_status_from_row(row):
             status = 'Preview'
     return product, status
 
-def get_products_by_region(region:str)->dict:    
+def get_products_by_region(region:str)->dict:
     services = {}
     options = webdriver.ChromeOptions()
     options.add_argument('--disable-gpu')
