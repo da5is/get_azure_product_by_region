@@ -44,14 +44,14 @@ def write_services_into_csv(region:str, region_product_data: dict):
     import csv
     expanded_services = []
     keys = sorted(region_product_data.keys())
-    header = ["Service", "Status", "Capability", "Capability Status"]
+    header = ["Service", "Capability", "Capability Status"]
     for key in keys:
         if not region_product_data[key]['capabilities']:
-            expanded_services.append([region_product_data[key]['name'], region_product_data[key]['status'], "N/A", "N/A"])
+            expanded_services.append([region_product_data[key]['name'], "",region_product_data[key]['status']])
         else:
             capability_keys = sorted(region_product_data[key]['capabilities'].keys())
             for capability_key in capability_keys:
-                expanded_services.append([region_product_data[key]['name'], "N/A", capability_key, region_product_data[key]['capabilities'][capability_key]])
+                expanded_services.append([region_product_data[key]['name'], capability_key, region_product_data[key]['capabilities'][capability_key]])
     with open(f'{region}.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(header)
